@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
 
   rabbitmq:
@@ -49,7 +49,9 @@ services:
 
   vehiclemanagementapi:
     image: pitstop/vehiclemanagementapi:latest
-    build: VehicleManagementAPI
+    build: 
+      context: ./VehicleManagementAPI
+      dockerfile: Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -62,7 +64,9 @@ services:
 
   customermanagementapi:
     image: pitstop/customermanagementapi:latest
-    build: CustomerManagementAPI
+    build: 
+      context: ./CustomerManagementAPI
+      dockerfile: Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -75,7 +79,9 @@ services:
 
   workshopmanagementapi:
     image: pitstop/workshopmanagementapi:latest
-    build: WorkshopManagementAPI
+    build: 
+      context: ./WorkshopManagementAPI
+      dockerfile: Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -88,7 +94,9 @@ services:
 
   apigateway:
     image: pitstop/apigateway:latest
-    build: APIGateway
+    build: 
+      context: ./APIGateway
+      dockerfile: Dockerfile
     container_name: apigateway
     depends_on:
       - discoveryservice
@@ -103,7 +111,9 @@ services:
 
   auditlogservice:
     image: pitstop/auditlogservice:latest
-    build: AuditlogService
+    build: 
+      context: ./AuditlogService
+      dockerfile: Dockerfile
     container_name: auditlogservice
     depends_on:
       - rabbitmq
@@ -112,7 +122,9 @@ services:
 
   invoiceservice:
     image: pitstop/invoiceservice:latest
-    build: InvoiceService
+    build:
+      context: ./InvoiceService
+      dockerfile: Dockerfile
     container_name: invoiceservice
     depends_on:
       - rabbitmq
@@ -122,7 +134,9 @@ services:
 
   notificationservice:
     image: pitstop/notificationservice:latest
-    build: NotificationService
+    build:
+      context: ./NotificationService
+      dockerfile: Dockerfile
     container_name: notificationservice
     depends_on:
       - rabbitmq
@@ -133,7 +147,9 @@ services:
 
   timeservice:
     image: pitstop/timeservice:latest
-    build: TimeService
+    build: 
+      context: ./TimeService
+      dockerfile: Dockerfile
     container_name: timeservice
     depends_on:
       - rabbitmq
@@ -142,7 +158,9 @@ services:
 
   workshopmanagementeventhandler:
     image: pitstop/workshopmanagementeventhandler:latest
-    build: WorkshopManagementEventHandler
+    build: 
+      context: ./WorkshopManagementEventHandler
+      dockerfile: Dockerfile
     container_name: workshopmanagementeventhandler
     depends_on:
       - rabbitmq
@@ -152,7 +170,9 @@ services:
 
   webapp:
     image: pitstop/webapp:latest
-    build: WebApp
+    build: 
+      context: ./WebApp
+      dockerfile: Dockerfile
     container_name: webapp
     depends_on:
       - apigateway

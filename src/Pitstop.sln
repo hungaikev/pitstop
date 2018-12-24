@@ -39,9 +39,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceService", "InvoiceSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "APIGateway\APIGateway.csproj", "{B2E3A0EC-C402-4B48-81E9-FC6859D18313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Messaging", "Infrastructure.Messaging\Infrastructure.Messaging.csproj", "{2A627307-3EB2-4011-B304-BBC256738493}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Messaging", "Infrastructure.Messaging\Infrastructure.Messaging.csproj", "{2A627307-3EB2-4011-B304-BBC256738493}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.ServiceDiscovery", "Infrastructure.ServiceDiscovery\Infrastructure.ServiceDiscovery.csproj", "{F14C7FC8-6C68-48FF-A92B-379EBBA24F59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.ServiceDiscovery", "Infrastructure.ServiceDiscovery\Infrastructure.ServiceDiscovery.csproj", "{F14C7FC8-6C68-48FF-A92B-379EBBA24F59}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +199,18 @@ Global
 		{F14C7FC8-6C68-48FF-A92B-379EBBA24F59}.Release|x64.Build.0 = Release|Any CPU
 		{F14C7FC8-6C68-48FF-A92B-379EBBA24F59}.Release|x86.ActiveCfg = Release|Any CPU
 		{F14C7FC8-6C68-48FF-A92B-379EBBA24F59}.Release|x86.Build.0 = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|x64.Build.0 = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Debug|x86.Build.0 = Debug|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|x64.ActiveCfg = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|x64.Build.0 = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|x86.ActiveCfg = Release|Any CPU
+		{95CE2848-9AD0-45A6-B6A9-F57D6FBD7222}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
