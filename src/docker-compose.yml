@@ -49,9 +49,10 @@ services:
 
   vehiclemanagementapi:
     image: pitstop/vehiclemanagementapi:latest
+    container_name: vehiclemanagementapi
     build: 
-      context: ./VehicleManagementAPI
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: VehicleManagementAPI/Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -61,12 +62,14 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${PitStopAIKey}
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
 
   customermanagementapi:
     image: pitstop/customermanagementapi:latest
+    container_name: customermanagementapi
     build: 
-      context: ./CustomerManagementAPI
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: CustomerManagementAPI/Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -76,12 +79,14 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${PitStopAIKey}
+      - ASPNETCORE_URLS=http://0.0.0.0:5100
 
   workshopmanagementapi:
     image: pitstop/workshopmanagementapi:latest
+    container_name: workshopmanagementapi
     build: 
-      context: ./WorkshopManagementAPI
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: WorkshopManagementAPI/Dockerfile
     depends_on:
       - discoveryservice
       - rabbitmq
@@ -91,6 +96,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${PitStopAIKey}
+      - ASPNETCORE_URLS=http://0.0.0.0:5200
 
   apigateway:
     image: pitstop/apigateway:latest
@@ -108,6 +114,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${PitStopAIKey}
+      - ASPNETCORE_URLS=http://0.0.0.0:10000
 
   auditlogservice:
     image: pitstop/auditlogservice:latest
@@ -181,6 +188,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ApplicationInsights:InstrumentationKey=${PitStopAIKey}
+      - ASPNETCORE_URLS=http://0.0.0.0:7000
 
 volumes:
   sqlserverdata:

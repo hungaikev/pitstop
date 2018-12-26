@@ -2,11 +2,13 @@ FROM microsoft/dotnet:2.2-sdk AS build-env
 WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
-COPY *.csproj ./
+COPY CustomerManagementAPI/*.csproj ./
+# Copy referenced Service Discovery project
+COPY Infrastructure.ServiceDiscovery ../Infrastructure.ServiceDiscovery
 RUN dotnet restore -s https://api.nuget.org/v3/index.json -s https://www.myget.org/F/pitstop/api/v3/index.json
 
 # Copy everything else and build
-COPY . ./
+COPY CustomerManagementAPI ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image

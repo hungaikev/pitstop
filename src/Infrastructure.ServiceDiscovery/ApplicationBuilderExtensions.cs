@@ -33,12 +33,15 @@ namespace Pitstop.Infrastructure.ServiceDiscovery
 
             var features = app.Properties["server.Features"] as FeatureCollection;
             var addresses = features.Get<IServerAddressesFeature>();
-            var address = addresses.Addresses.First().Replace("*", ip);
+            var address = addresses.Addresses.First();
 
-            System.Console.WriteLine($"Address used for Consul registration: {address}");
-            
             // Register service with consul
-            var uri = new Uri(address);
+            var builder = new UriBuilder(address);
+            builder.Host = ip;
+            var uri = builder.Uri;
+
+            logger.LogInformation($"Address used for Consul registration: {uri}");
+
             var registration = new AgentServiceRegistration()
             {
                 ID = $"{consulConfig.Value.ServiceID}-{hostname}-{uri.Port}",
