@@ -48,7 +48,7 @@ services:
       - ACCEPT_EULA=Y 
 
   vehiclemanagementapi:
-    image: pitstop/vehiclemanagementapi:latest
+    image: jaesoft/vehiclemanagementapi:latest
     container_name: vehiclemanagementapi
     build: 
       context: .
@@ -65,7 +65,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:5000
 
   customermanagementapi:
-    image: pitstop/customermanagementapi:latest
+    image: jaesoft/customermanagementapi:latest
     container_name: customermanagementapi
     build: 
       context: .
@@ -82,7 +82,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:5100
 
   workshopmanagementapi:
-    image: pitstop/workshopmanagementapi:latest
+    image: jaesoft/workshopmanagementapi:latest
     container_name: workshopmanagementapi
     build: 
       context: .
@@ -99,7 +99,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:5200
 
   apigateway:
-    image: pitstop/apigateway:latest
+    image: jaesoft/apigateway:latest
     build: 
       context: ./APIGateway
       dockerfile: Dockerfile
@@ -117,7 +117,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:10000
 
   auditlogservice:
-    image: pitstop/auditlogservice:latest
+    image: jaesoft/auditlogservice:latest
     build: 
       context: ./AuditlogService
       dockerfile: Dockerfile
@@ -128,7 +128,7 @@ services:
       - PITSTOP_ENVIRONMENT=Production
 
   invoiceservice:
-    image: pitstop/invoiceservice:latest
+    image: jaesoft/invoiceservice:latest
     build:
       context: ./InvoiceService
       dockerfile: Dockerfile
@@ -140,7 +140,7 @@ services:
       - PITSTOP_ENVIRONMENT=Production
 
   notificationservice:
-    image: pitstop/notificationservice:latest
+    image: jaesoft/notificationservice:latest
     build:
       context: ./NotificationService
       dockerfile: Dockerfile
@@ -153,7 +153,7 @@ services:
       - PITSTOP_ENVIRONMENT=Production
 
   timeservice:
-    image: pitstop/timeservice:latest
+    image: jaesoft/timeservice:latest
     build: 
       context: ./TimeService
       dockerfile: Dockerfile
@@ -164,7 +164,7 @@ services:
       - PITSTOP_ENVIRONMENT=Production
 
   workshopmanagementeventhandler:
-    image: pitstop/workshopmanagementeventhandler:latest
+    image: jaesoft/workshopmanagementeventhandler:latest
     build: 
       context: ./WorkshopManagementEventHandler
       dockerfile: Dockerfile
@@ -176,7 +176,7 @@ services:
       - PITSTOP_ENVIRONMENT=Production
 
   webapp:
-    image: pitstop/webapp:latest
+    image: jaesoft/webapp:latest
     build: 
       context: ./WebApp
       dockerfile: Dockerfile
