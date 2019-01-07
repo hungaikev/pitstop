@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Identity.Data
+namespace Pitstop.Identity.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

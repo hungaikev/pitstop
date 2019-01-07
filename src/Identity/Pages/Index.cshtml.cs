@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Identity.Pages
+namespace Pitstop.Identity.Pages
 {
     public class IndexModel : PageModel
     {
