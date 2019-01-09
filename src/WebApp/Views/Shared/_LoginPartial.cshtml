@@ -1,0 +1,23 @@
+@inject IIdentityParser<ApplicationUser> UserManager
+
+<ul class="nav navbar-nav navbar-right">
+    @if (User.FindFirst(x => x.Type == "preferred_username") != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" title="Manage">Hello @User.FindFirst(x => x.Type == "preferred_username").Value!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="" asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm">
+                
+            </form>
+            <a class="nav-link text-dark"
+               href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignIn">Login</a>
+        </li>
+    }
+</ul>

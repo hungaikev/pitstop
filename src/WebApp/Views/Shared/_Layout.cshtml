@@ -33,11 +33,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="CustomerManagement" asp-action="Index">Customer Management</a></li>
-                    <li><a asp-area="" asp-controller="VehicleManagement" asp-action="Index">Vehicle Management</a></li>
-                    <li><a asp-area="" asp-controller="WorkshopManagement" asp-action="Index">Workshop Management</a></li>
+                    @if (User.FindFirst(x => x.Type == "preferred_username") != null)
+                    {
+                        <li><a asp-area="" asp-controller="CustomerManagement" asp-action="Index">Customer Management</a></li>
+                        <li><a asp-area="" asp-controller="VehicleManagement" asp-action="Index">Vehicle Management</a></li>
+                        <li><a asp-area="" asp-controller="WorkshopManagement" asp-action="Index">Workshop Management</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                 </ul>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -45,7 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - PitStop</p>
+            <p>&copy; 2019 - PitStop</p>
         </footer>
     </div>
 
