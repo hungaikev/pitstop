@@ -20,7 +20,10 @@ namespace Pitstop.Identity.Data
             var clientUrls = new Dictionary<string, string>();
 
             clientUrls.Add("Mvc", configuration.GetValue<string>("WebAppClient"));
-            
+            clientUrls.Add("Workshop", configuration.GetValue<string>("WorkshopManagementApi"));
+            clientUrls.Add("Customer", configuration.GetValue<string>("CustomerManagementApi"));
+            clientUrls.Add("Vehicle", configuration.GetValue<string>("VehicleManagementApi"));
+
 
             if (!context.Clients.Any())
             {

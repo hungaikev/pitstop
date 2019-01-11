@@ -70,6 +70,52 @@ namespace Pitstop.Identity.Configuration
                     },
                     AccessTokenLifetime = 60*60*2, // 2 hours
                     IdentityTokenLifetime= 60*60*2 // 2 hours
+                },
+                new Client
+                {
+                    ClientId = "vehicleswaggerui",
+                    ClientName = "Workshop API Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{clientsUrl["Vehicle"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientsUrl["Vehicle"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "vehicles"
+                    },
+                    RequireConsent = false
+                },
+                new Client
+                {
+                    ClientId = "customerswaggerui",
+                    ClientName = "Customer API Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{clientsUrl["Customer"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientsUrl["Customer"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "customers"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "workshopswaggerui",
+                    ClientName = "Workshop Management API Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{clientsUrl["Workshop"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientsUrl["Workshop"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "workshop"
+                    }
                 }
             };
         }

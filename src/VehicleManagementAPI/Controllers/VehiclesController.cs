@@ -8,9 +8,11 @@ using AutoMapper;
 using Pitstop.Infrastructure.Messaging;
 using Pitstop.Application.VehicleManagement.Events;
 using Pitstop.Application.VehicleManagement.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pitstop.Application.VehicleManagement.Controllers
 {
+    [Authorize]
     [Route("/api/[controller]")]
     public class VehiclesController : Controller
     {

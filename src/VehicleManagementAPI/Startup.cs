@@ -17,6 +17,9 @@ using Serilog;
 using Microsoft.Extensions.HealthChecks;
 using Pitstop.Infrastructure.ServiceDiscovery;
 using Consul;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Collections.Generic;
 
 namespace Pitstop.Application.VehicleManagement
 {
@@ -60,10 +63,38 @@ namespace Pitstop.Application.VehicleManagement
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            // prevent from mapping "sub" claim to nameidentifier.
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+            var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "orders";
+            });
+
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "VehicleManagement API", Version = "v1" });
+                c.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                {
+                    Type = "oauth2",
+                    Flow = "implicit",
+                    AuthorizationUrl = $"{Configuration.GetValue<string>("IdentityUrl")}/connect/authorize",
+                    TokenUrl = $"{Configuration.GetValue<string>("IdentityUrl")}/connect/token",
+                    Scopes = new Dictionary<string, string>()
+                    {
+                        { "vehicles", "Vehicle Management API Service" }
+                    }
+                });
+
+                // c.OperationFilter<AuthorizeCheckOperationFilter>();
             });
 
             services.AddHealthChecks(checks =>
@@ -85,15 +116,16 @@ namespace Pitstop.Application.VehicleManagement
             app.UseStaticFiles();
 
             SetupAutoMapper();
-
+            app.UseAuthentication();
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "VehicleManagement API - v1");
-            });
+            app.UseSwagger()
+               .UseSwaggerUI(c =>
+               {
+                   c.SwaggerEndpoint("/swagger/v1/swagger.json", "VehicleManagement API - v1");
+                   c.OAuthClientId("vehicleswaggerui");
+                   c.OAuthAppName("Workshop API Swagger UI");
+               });
 
             // register service in Consul
             app.RegisterWithConsul(lifetime);            
