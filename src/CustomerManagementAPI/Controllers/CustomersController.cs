@@ -8,10 +8,12 @@ using AutoMapper;
 using Pitstop.Infrastructure.Messaging;
 using Pitstop.CustomerManagementAPI.Events;
 using Pitstop.CustomerManagementAPI.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pitstop.Application.VehicleManagement.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize]
     public class CustomersController : Controller
     {
         IMessagePublisher _messagePublisher;

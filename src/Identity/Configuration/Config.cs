@@ -74,7 +74,7 @@ namespace Pitstop.Identity.Configuration
                 new Client
                 {
                     ClientId = "vehicleswaggerui",
-                    ClientName = "Workshop API Swagger UI",
+                    ClientName = "Vehicle API Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
@@ -84,8 +84,7 @@ namespace Pitstop.Identity.Configuration
                     AllowedScopes =
                     {
                         "vehicles"
-                    },
-                    RequireConsent = false
+                    }
                 },
                 new Client
                 {

@@ -42,6 +42,35 @@ namespace Pitstop.APIGateway
                 })
                 .ConfigureServices(s =>
                 {
+                    var authenticationProviderKey = "IdentityApiKey";
+                    var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+
+                    s.AddAuthentication()
+                    .AddJwtBearer(authenticationProviderKey, x =>
+                    {
+                        x.Authority = identityUrl;
+                        x.RequireHttpsMetadata = false;
+                        x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                        {
+                            ValidAudiences = new[] { "vehicles", "customers", "workshop" }
+                        };
+                        x.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents()
+                        {
+                            OnAuthenticationFailed = async ctx =>
+                            {
+                                int i = 0;
+                            },
+                            OnTokenValidated = async ctx =>
+                            {
+                                int i = 0;
+                            },
+
+                            OnMessageReceived = async ctx =>
+                            {
+                                int i = 0;
+                            }
+                        };
+                    });
                     s.AddOcelot()
                      .AddConsul();
                     s.AddHealthChecks(checks =>

@@ -11,7 +11,7 @@
   "profiles": {
     "APIGateway": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "api/",
       "applicationUrl": "http://localhost:10000",
       "environmentVariables": {
@@ -20,7 +20,7 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "api/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

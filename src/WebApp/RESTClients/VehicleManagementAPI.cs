@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Refit;
 using WebApp.Commands;
 using System.Net;
+using System.Net.Http;
 
 namespace WebApp.RESTClients
 {
@@ -12,12 +13,12 @@ namespace WebApp.RESTClients
     {
         private IVehicleManagementAPI _client;
 
-        public  VehicleManagementAPI(IHostingEnvironment env)
+        public  VehicleManagementAPI(IHostingEnvironment env, HttpClient httpClient)
         {
             string apiHost = env.IsDevelopment() ? "localhost" : "apigateway";
             int apiPort = 10000;
-            string baseUri = $"http://{apiHost}:{apiPort}/api";
-            _client = RestService.For<IVehicleManagementAPI>(baseUri);
+            httpClient.BaseAddress = new System.Uri($"http://{apiHost}:{apiPort}/api");
+            _client = RestService.For<IVehicleManagementAPI>(httpClient);
         }
 
         public async Task<List<Vehicle>> GetVehicles()

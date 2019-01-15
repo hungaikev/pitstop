@@ -20,6 +20,7 @@ using Consul;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Collections.Generic;
+using Pitstop.Application.VehicleManagement.Behaviours;
 
 namespace Pitstop.Application.VehicleManagement
 {
@@ -59,12 +60,8 @@ namespace Pitstop.Application.VehicleManagement
                 consulConfig.Address = new Uri(address);
             })); 
 
-            // Add framework services.
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             // prevent from mapping "sub" claim to nameidentifier.
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             var identityUrl = Configuration.GetValue<string>("IdentityUrl");
             services.AddAuthentication(options =>
             {
@@ -75,8 +72,13 @@ namespace Pitstop.Application.VehicleManagement
             {
                 options.Authority = identityUrl;
                 options.RequireHttpsMetadata = false;
-                options.Audience = "orders";
+                options.Audience = "vehicles";
             });
+
+            // Add framework services.
+            services.AddMvc()
+                .AddControllersAsServices()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -94,7 +96,7 @@ namespace Pitstop.Application.VehicleManagement
                     }
                 });
 
-                // c.OperationFilter<AuthorizeCheckOperationFilter>();
+                c.OperationFilter<AuthorizeCheckOperationFilter>();
             });
 
             services.AddHealthChecks(checks =>
@@ -111,12 +113,14 @@ namespace Pitstop.Application.VehicleManagement
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
 
-            app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            // Important to register MVC pipeline after Authentication
+            app.UseMvc();
 
             SetupAutoMapper();
-            app.UseAuthentication();
+            
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             app.UseSwagger()
@@ -124,7 +128,7 @@ namespace Pitstop.Application.VehicleManagement
                {
                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "VehicleManagement API - v1");
                    c.OAuthClientId("vehicleswaggerui");
-                   c.OAuthAppName("Workshop API Swagger UI");
+                   c.OAuthAppName("Vehicle API Swagger UI");
                });
 
             // register service in Consul

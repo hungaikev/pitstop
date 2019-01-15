@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-Identity-DAE25407-B608-4073-9C3B-C4EC450369C2</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <RootNamespace>Pitstop.Identity</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Certificate\idsrv4test.pfx" />
+    <EmbeddedResource Include="Certificate\idsrv4test.pfx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 
@@ -22,6 +25,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
 

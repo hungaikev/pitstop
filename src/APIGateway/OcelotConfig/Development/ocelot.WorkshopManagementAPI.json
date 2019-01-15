@@ -1,28 +1,36 @@
 ﻿{
   "ReRoutes": [
     {
-      "Key": "WorkshopPlanningAPI",
-      "UpstreamPathTemplate": "/api/workshopplanning/{trailingSegments}",
-      "DownstreamPathTemplate": "/api/workshopplanning/{trailingSegments}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5200
+        "Key": "WorkshopPlanningAPI",
+        "UpstreamPathTemplate": "/api/workshopplanning/{trailingSegments}",
+        "DownstreamPathTemplate": "/api/workshopplanning/{trailingSegments}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5200
+            }
+        ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "IdentityApiKey",
+            "AllowedScopes": []
         }
-      ]
     },
     {
-      "Key": "WorkshopRefDataAPI",
-      "UpstreamPathTemplate": "/api/refdata/{trailingSegments}",
-      "DownstreamPathTemplate": "/api/refdata/{trailingSegments}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5200
+        "Key": "WorkshopRefDataAPI",
+        "UpstreamPathTemplate": "/api/refdata/{trailingSegments}",
+        "DownstreamPathTemplate": "/api/refdata/{trailingSegments}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5200
+            }
+        ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "IdentityApiKey",
+            "AllowedScopes": []
         }
-      ]
     }
   ]
 }

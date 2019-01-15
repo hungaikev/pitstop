@@ -46,7 +46,7 @@ The application uses the following domain-objects:
 ### Solution Architecture
 I've created a solution architecture diagram which shows all the moving parts in the application. You will probably recognize how the different bounded-contexts in the context-map are represented by the services in this architecture:
 
-![Solution Architecture](img/solution-architecture.png)
+![Solution Architecture](img/solution-architecture-Updated.png)
 
 #### PitStop Web App
 The web application is the front-end for the system. Users can manage customers, vehicles and the planning for the workshop from this front-end. The front-end will only communicate with the different APIs in the system (throug the API Gateway) hand has no knowledge of the message-broker or any other services.
@@ -291,6 +291,9 @@ To test the application you need to open the following web-pages:
 
 Now you can follow the following scenario (make sure you fill all the fields in the entry-forms):
 
+- Login with the following credentials or create a new one
+  demouser@pitstop.com  
+  P@ssw0rd
 - Register a new customer on the *Customer Management* screen.
 - Register a new Vehicle for this customer on the *Vehicle Management* screen.
 - Register a couple of Maintenance Jobs for the vehicle on the *Workshop Management* screen.

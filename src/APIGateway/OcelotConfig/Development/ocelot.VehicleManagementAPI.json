@@ -1,28 +1,36 @@
 ﻿{
   "ReRoutes": [
     {
-      "Key": "VehicleManagementAPI",
-      "UpstreamPathTemplate": "/api/vehicles/",
-      "DownstreamPathTemplate": "/api/vehicles",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5000
+        "Key": "VehicleManagementAPI",
+        "UpstreamPathTemplate": "/api/vehicles/",
+        "DownstreamPathTemplate": "/api/vehicles",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5000
+            }
+        ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "IdentityApiKey",
+            "AllowedScopes": []
         }
-      ]
     },
     {
-      "Key": "VehicleManagementAPI",
-      "UpstreamPathTemplate": "/api/vehicles/{trailingSegments}",
-      "DownstreamPathTemplate": "/api/vehicles/{trailingSegments}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5000
+        "Key": "VehicleManagementAPI",
+        "UpstreamPathTemplate": "/api/vehicles/{trailingSegments}",
+        "DownstreamPathTemplate": "/api/vehicles/{trailingSegments}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5000
+            }
+        ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "IdentityApiKey",
+            "AllowedScopes": []
         }
-      ]
     }
   ]
 }

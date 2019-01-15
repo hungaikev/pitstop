@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Pitstop.Services;
+using Microsoft.AspNetCore.Http;
+using WebApp.HttpHandlers;
 
 namespace PitStop
 {
@@ -47,9 +49,8 @@ namespace PitStop
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // add custom services
-            services.AddTransient<ICustomerManagementAPI, CustomerManagementAPI>();
-            services.AddTransient<IVehicleManagementAPI, VehicleManagementAPI>();
             services.AddTransient<IWorkshopManagementAPI, WorkshopManagementAPI>();
+            services.AddHttpClientServices();
             services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
 
             services.AddHealthChecks(checks =>
@@ -78,6 +79,7 @@ namespace PitStop
                 options.RequireHttpsMetadata = false;
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
+                options.Scope.Add("vehicles");
                 options.Scope.Add("customers");
             });
 
@@ -129,4 +131,27 @@ namespace PitStop
             });
         }
     }
-}
+
+    static class ServiceCollectionExtensions
+    {
+        // Adds all Http client services (like Service-Agents) using resilient Http requests based on HttpClient factory and Polly's policies 
+        public static IServiceCollection AddHttpClientServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //register delegating handlers
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+
+            //set 5 min as the lifetime for each HttpMessageHandler int the pool
+            services.AddHttpClient("extendedhandlerlifetime").SetHandlerLifetime(TimeSpan.FromMinutes(5));
+
+            //add http client services
+            services.AddHttpClient<IVehicleManagementAPI, VehicleManagementAPI>()
+                   .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+            services.AddHttpClient<ICustomerManagementAPI, CustomerManagementAPI>()
+                   .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            return services;
+        }
+    }
+ }
