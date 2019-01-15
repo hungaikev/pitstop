@@ -14,10 +14,12 @@ using WorkshopManagementAPI.CommandHandlers;
 using Serilog;
 using WorkshopManagementAPI.Commands;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pitstop.WorkshopManagementAPI.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize]
     public class WorkshopPlanningController : Controller
     {
         private readonly IServiceProvider _serviceProvider;

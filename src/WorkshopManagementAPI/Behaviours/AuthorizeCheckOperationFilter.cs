@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pitstop.Application.CustomerManagementAPI.Behaviours
+namespace Pitstop.Application.WorkshopManagementAPI.Behaviours
 {
     public class AuthorizeCheckOperationFilter : IOperationFilter
     {

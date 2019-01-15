@@ -6,6 +6,7 @@ using Refit;
 using WebApp.Commands;
 using System;
 using System.Net;
+using System.Net.Http;
 
 namespace WebApp.RESTClients
 {
@@ -13,12 +14,12 @@ namespace WebApp.RESTClients
     {
         private IWorkshopManagementAPI _client;
 
-        public WorkshopManagementAPI(IHostingEnvironment env)
+        public WorkshopManagementAPI(IHostingEnvironment env, HttpClient httpClient)
         {
             string apiHost = env.IsDevelopment() ? "localhost" : "apigateway";
             int apiPort = 10000;
-            string baseUri = $"http://{apiHost}:{apiPort}/api";
-            _client = RestService.For<IWorkshopManagementAPI>(baseUri);
+            httpClient.BaseAddress = new System.Uri($"http://{apiHost}:{apiPort}/api");
+            _client = RestService.For<IWorkshopManagementAPI>(httpClient);
         }
 
         public async Task<WorkshopPlanning> GetWorkshopPlanning(string planningDate)

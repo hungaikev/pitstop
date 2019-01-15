@@ -47,6 +47,20 @@ services:
     environment:
       - ACCEPT_EULA=Y 
 
+  identity:
+    image: jaesoft/identity
+    container_name: identity
+    build:
+      context: .
+      dockerfile: Identity/Dockerfile
+    depends_on:
+      - sqlserver
+    ports:
+      - "5300:5300"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:5300
+
   vehiclemanagementapi:
     image: jaesoft/vehiclemanagementapi:latest
     container_name: vehiclemanagementapi
@@ -57,6 +71,7 @@ services:
       - discoveryservice
       - rabbitmq
       - sqlserver
+      - identity
     ports:
       - "5000"
     environment:
@@ -74,6 +89,7 @@ services:
       - discoveryservice
       - rabbitmq
       - sqlserver
+      - identity
     ports:
       - "5100"
     environment:
@@ -91,6 +107,7 @@ services:
       - discoveryservice
       - rabbitmq
       - sqlserver
+      - identity
     ports:
       - "5200"
     environment:
@@ -109,6 +126,7 @@ services:
       - vehiclemanagementapi
       - customermanagementapi
       - workshopmanagementapi
+      - identity
     ports:
       - "10000:10000"
     environment:

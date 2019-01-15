@@ -259,6 +259,8 @@ In order to run the application you need to take several steps. This description
    - `docker volume create sqlserverdata`
    - `docker volume create rabbitmqdata` 
 
+  You need to create two firewall rules for port `5300` both inbound and outbound.
+
 ## Starting the application
 This is it, you're now ready to spin up the system! Open up a Powershell window and go to the `Pitstop/src` folder. Then issue the following command: `docker-compose up`. This will start the solution with a single instance of the API services.
 
@@ -291,9 +293,9 @@ To test the application you need to open the following web-pages:
 
 Now you can follow the following scenario (make sure you fill all the fields in the entry-forms):
 
-- Login with the following credentials or create a new one
-  demouser@pitstop.com  
-  P@ssw0rd
+- Login with the following credentials or create a new one  
+  Username: demouser@pitstop.com  
+  Password: P@ssw0rd
 - Register a new customer on the *Customer Management* screen.
 - Register a new Vehicle for this customer on the *Vehicle Management* screen.
 - Register a couple of Maintenance Jobs for the vehicle on the *Workshop Management* screen.

@@ -20,7 +20,7 @@ using Consul;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Collections.Generic;
-using Pitstop.Application.CustomerManagement.Behaviours;
+using Pitstop.Application.CustomerManagementAPI.Behaviours;
 
 namespace Pitstop.CustomerManagementAPI
 {

@@ -52,6 +52,7 @@ namespace Pitstop.Identity
             // Adds IdentityServer
             services.AddIdentityServer(x =>
             {
+                x.IssuerUri = "null";
                 x.Authentication.CookieLifetime = TimeSpan.FromHours(2);
             })
             .AddSigningCredential(Certificate.Get())

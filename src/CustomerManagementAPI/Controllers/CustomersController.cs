@@ -10,7 +10,7 @@ using Pitstop.CustomerManagementAPI.Events;
 using Pitstop.CustomerManagementAPI.Commands;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Pitstop.Application.VehicleManagement.Controllers
+namespace Pitstop.Application.CustomerManagementAPI.Controllers
 {
     [Route("/api/[controller]")]
     [Authorize]

@@ -48,8 +48,6 @@ namespace PitStop
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // add custom services
-            services.AddTransient<IWorkshopManagementAPI, WorkshopManagementAPI>();
             services.AddHttpClientServices();
             services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
 
@@ -81,6 +79,7 @@ namespace PitStop
                 options.Scope.Add("profile");
                 options.Scope.Add("vehicles");
                 options.Scope.Add("customers");
+                options.Scope.Add("workshop");
             });
 
         }
@@ -150,7 +149,8 @@ namespace PitStop
                    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             services.AddHttpClient<ICustomerManagementAPI, CustomerManagementAPI>()
                    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-
+            services.AddHttpClient<IWorkshopManagementAPI, WorkshopManagementAPI>()
+                  .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             return services;
         }
     }

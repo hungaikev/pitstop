@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pitstop.WorkshopManagementAPI.Repositories;
 
 namespace Pitstop.WorkshopManagementAPI.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize]
     public class RefDataController : Controller
     {
         ICustomerRepository _customerRepo;

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.Extensions.HealthChecks;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Logging;
 
 namespace Pitstop.APIGateway
 {
@@ -35,7 +36,7 @@ namespace Pitstop.APIGateway
                     string ocelotConfigPath = Path.Combine(hostingContext.HostingEnvironment.ContentRootPath, "OcelotConfig");
                     ocelotConfigPath = Path.Combine(ocelotConfigPath, hostingContext.HostingEnvironment.EnvironmentName);
                     config.AddOcelot(ocelotConfigPath, hostingContext.HostingEnvironment);
-
+                    
                     config.AddEnvironmentVariables();
 
                     Configuration = config.Build();
@@ -85,6 +86,7 @@ namespace Pitstop.APIGateway
                     Log.Logger = new LoggerConfiguration()
                         .ReadFrom.Configuration(Configuration)
                         .CreateLogger();
+                    IdentityModelEventSource.ShowPII = true;
                 })
                 .UseIISIntegration()
                 .Configure(app =>
