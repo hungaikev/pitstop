@@ -5,6 +5,7 @@ using Pitstop.Identity.Data;
 using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Pitstop.Identity
 {
@@ -14,7 +15,15 @@ namespace Pitstop.Identity
         {
             CreateWebHostBuilder(args).Build()
                 .MigrateDbContext<PersistedGrantDbContext>((_, __) => { })
-                .MigrateDbContext<ApplicationDbContext>((_, __) => { })
+                .MigrateDbContext<ApplicationDbContext>((context, services) => 
+                {
+                    var env = services.GetService<IHostingEnvironment>();
+                    var logger = services.GetService<ILogger<ApplicationDbContextSeed>>();
+
+                    new ApplicationDbContextSeed()
+                        .SeedAsync(context, env, logger)
+                        .Wait();
+                })
                 .MigrateDbContext<ConfigurationDbContext>((context, services) =>
                 {
                     var configuration = services.GetService<IConfiguration>();
